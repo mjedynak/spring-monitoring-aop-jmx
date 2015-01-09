@@ -1,4 +1,4 @@
-package pl.mjedynak.metric;
+package pl.mjedynak.single_aspect.metric;
 
 import org.springframework.integration.monitor.ExponentialMovingAverage;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
@@ -12,14 +12,14 @@ import static org.springframework.integration.monitor.DirectChannelMetrics.DEFAU
 
 @Component
 @ManagedResource
-public class InvocationTimeMetric {
+public class InvocationTimeMetricAggregator {
 
     private static final String FAST_SERVICE = "pl.mjedynak.service.FastTimeService";
     private static final String SLOW_SERVICE = "pl.mjedynak.service.SlowTimeService";
 
     private Map<String, ExponentialMovingAverage> map = new ConcurrentHashMap<>();
 
-    public InvocationTimeMetric() {
+    public InvocationTimeMetricAggregator() {
         map.put(FAST_SERVICE, new ExponentialMovingAverage(DEFAULT_MOVING_AVERAGE_WINDOW));
         map.put(SLOW_SERVICE, new ExponentialMovingAverage(DEFAULT_MOVING_AVERAGE_WINDOW));
     }

@@ -1,4 +1,4 @@
-package pl.mjedynak;
+package pl.mjedynak.multiple_aspects_single_metric;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package pl.mjedynak.aspect;
+package pl.mjedynak.single_aspect.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
-import pl.mjedynak.metric.InvocationTimeMetric;
+import pl.mjedynak.single_aspect.metric.InvocationTimeMetricAggregator;
 
 @Aspect
 @Component
@@ -16,9 +16,9 @@ public class MonitoredInvocationTimeAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(MonitoredInvocationTimeAspect.class.getName());
 
-    @Autowired private InvocationTimeMetric invocationTimeMetric;
+    @Autowired private InvocationTimeMetricAggregator invocationTimeMetricAggregator;
 
-    @Around("@annotation(pl.mjedynak.annotation.MonitoredInvocationTime)")
+    @Around("@annotation(pl.mjedynak.single_aspect.annotation.MonitoredInvocationTime)")
     public Object monitoredInvocation(ProceedingJoinPoint joinPoint) throws Throwable {
         String name = getName(joinPoint);
         logger.debug("Invoking " + name + " " + joinPoint.getSignature().toShortString());
@@ -26,7 +26,7 @@ public class MonitoredInvocationTimeAspect {
         timer.start();
         Object result = joinPoint.proceed();
         timer.stop();
-        invocationTimeMetric.updateMetric(name, timer.getTotalTimeMillis());
+        invocationTimeMetricAggregator.updateMetric(name, timer.getTotalTimeMillis());
         return result;
     }
 
