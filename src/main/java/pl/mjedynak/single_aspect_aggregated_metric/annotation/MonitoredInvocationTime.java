@@ -1,4 +1,4 @@
-package pl.mjedynak.single_aspect.annotation;
+package pl.mjedynak.single_aspect_aggregated_metric.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -1,4 +1,4 @@
-package pl.mjedynak.single_aspect.metric;
+package pl.mjedynak.single_aspect_aggregated_metric.metric;
 
 import org.springframework.integration.monitor.ExponentialMovingAverage;
 import org.springframework.jmx.export.annotation.ManagedAttribute;

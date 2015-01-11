@@ -1,4 +1,4 @@
-package pl.mjedynak.single_aspect;
+package pl.mjedynak.aspect_and_metric_combined;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,7 +15,7 @@ import javax.management.MalformedObjectNameException;
 @Configuration
 @EnableAspectJAutoProxy
 @EnableMBeanExport
-@ComponentScan({"pl.mjedynak.single_aspect", "pl.mjedynak.service"})
+@ComponentScan({"pl.mjedynak.aspect_and_metric_combined", "pl.mjedynak.service"})
 public class AppConfig {
 
     @Bean

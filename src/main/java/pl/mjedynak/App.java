@@ -1,4 +1,4 @@
-package pl.mjedynak.multiple_aspects_single_metric;
+package pl.mjedynak;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,9 @@ public class App {
     private static final Logger logger = LoggerFactory.getLogger(App.class);
 
     public static void main(String[] args) throws IOException {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+//        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(pl.mjedynak.single_aspect_aggregated_metric.AppConfig.class);
+//        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(pl.mjedynak.multiple_aspects_single_metric.AppConfig.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(pl.mjedynak.aspect_and_metric_combined.AppConfig.class);
         TimeService fastTimeService = context.getBean("fastTimeService", TimeService.class);
         TimeService slowTimeService = context.getBean("slowTimeService", TimeService.class);
         logger.debug(fastTimeService.getCurrentTime().toString());
