@@ -17,6 +17,8 @@ public abstract class AbstractMonitoredInvocationTimeAspect {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    private final ExponentialMovingAverage exponentialMovingAverage = new ExponentialMovingAverage(DEFAULT_MOVING_AVERAGE_WINDOW);
+
     public Object invokeWithMonitoring(ProceedingJoinPoint joinPoint) throws Throwable {
         logger.debug("Invoking " + joinPoint.getSignature().toShortString());
         StopWatch timer = new StopWatch();
@@ -26,8 +28,6 @@ public abstract class AbstractMonitoredInvocationTimeAspect {
         exponentialMovingAverage.append(timer.getTotalTimeMillis());
         return result;
     }
-
-    private final ExponentialMovingAverage exponentialMovingAverage = new ExponentialMovingAverage(DEFAULT_MOVING_AVERAGE_WINDOW);
 
     @ManagedAttribute
     public String getStatistics() {
