@@ -26,7 +26,7 @@ public class ServiceIsCoveredWithAspectsTest {
                 .getTopLevelClasses(packageWithAspectClasses);
 
         for (ClassPath.ClassInfo aClass : classes) {
-            Optional<String> aroundAnnotationValue = getAroundAnnotationValue(Class.forName(aClass.getName()));
+            Optional<String> aroundAnnotationValue = getAroundAnnotationValue(aClass.load());
             if (aroundAnnotationValue.isPresent()) {
                 removeMethodNameIfCoveredByAnnotation(methodNames, aroundAnnotationValue.get());
             }
