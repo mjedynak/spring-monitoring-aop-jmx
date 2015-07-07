@@ -19,9 +19,11 @@ public class ServiceIsCoveredWithAspectsTest {
 
     @Test
     public void serviceIsCoveredWithAspects() throws Exception {
-        Set<String> methodNames = getMethodNames(getAllDeclaredMethods(TimeService.class));
+        String packageWithAspectClasses = "pl.mjedynak.aspect_and_metric_combined.aspect";
+        Class<TimeService> interfaceThatShouldHaveAspects = TimeService.class;
+        Set<String> methodNames = getMethodNames(getAllDeclaredMethods(interfaceThatShouldHaveAspects));
         ImmutableSet<ClassPath.ClassInfo> classes = ClassPath.from(Thread.currentThread().getContextClassLoader())
-                .getTopLevelClasses("pl.mjedynak.aspect_and_metric_combined.aspect");
+                .getTopLevelClasses(packageWithAspectClasses);
 
         for (ClassPath.ClassInfo aClass : classes) {
             Optional<String> aroundAnnotationValue = getAroundAnnotationValue(Class.forName(aClass.getName()));
